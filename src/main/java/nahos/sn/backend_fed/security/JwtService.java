@@ -54,11 +54,12 @@ public class JwtService {
 
     private Map<String, String> generateJwt(Utilisateur utilisateur) {
         final long currentTime = System.currentTimeMillis();
-        final long expirationTime = currentTime + 30 * 60 * 1000;
+        final long expirationTime = currentTime + 30 * 60 * 10000;
 
         final Map<String, Object> claims = Map.of(
                 "nom", utilisateur.getNom(),
                 "user_id",utilisateur.getUser_id(),
+                "user_role",utilisateur.getRole().getLibelle(),
                 Claims.EXPIRATION, new Date(expirationTime),
                 Claims.SUBJECT, utilisateur.getEmail()
         );

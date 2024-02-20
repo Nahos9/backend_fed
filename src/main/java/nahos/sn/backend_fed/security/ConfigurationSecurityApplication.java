@@ -40,8 +40,9 @@ public class ConfigurationSecurityApplication {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(ar->ar.requestMatchers("/api/auth/**")
-                        .permitAll()
+                .authorizeHttpRequests(ar->ar
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/demande/**").permitAll()
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(sn->sn.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
